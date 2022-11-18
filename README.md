@@ -6,4 +6,6 @@ The 100 repositories were hand picked from the top 200 repositories (roughly by 
 
 Powered by Next.js, highlight.js, and the GitHub API!
 
-![Preview image CodeGuessr](https://github.com/healeycodes/codeguessr/blob/main/preview.png)
+<img alt="Preview image CodeGuessr" src="https://github.com/healeycodes/codeguessr/blob/main/preview.png" width="375"/>
+
+<br>
