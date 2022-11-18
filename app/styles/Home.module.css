@@ -1,0 +1,77 @@
+.container {
+  padding: 0 2rem;
+}
+
+.main {
+  min-height: 100vh;
+  padding: 4rem 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.snippet {
+  border: 2px solid #dce0e8;
+  white-space: pre-wrap;
+}
+
+.guessbtn {
+  padding: 14px;
+  background-color: #fff;
+  border: 2px solid #dce0e8;
+  cursor: pointer;
+  margin-top: 14px;
+  margin-bottom: 4px;
+  margin-right: 14px;
+  width: 125px;
+  display: inline-block;
+}
+
+.guessbtn:hover:not([disabled]) {
+  padding: 14px;
+  background-color: #dce0e8;
+  border: 2px solid #6c6f85;
+  cursor: pointer;
+  margin-top: 14px;
+  margin-bottom: 4px;
+  margin-right: 14px;
+  width: 125px;
+  display: inline-block;
+}
+
+.guessbtn:disabled {
+  cursor: not-allowed;
+}
+
+.guesstext {
+  display: inline-block;
+  margin-left: 10px;
+  font-style: italic;
+}
+
+.title a {
+  color: #0070f3;
+  text-decoration: none;
+}
+
+.title a:hover,
+.title a:focus,
+.title a:active {
+  text-decoration: underline;
+}
+
+.title {
+  margin: 0;
+  line-height: 1.15;
+  font-size: 3.5rem;
+}
+
+.title,
+.description {
+  text-align: center;
+}
+
+.description {
+  margin: 4rem 0;
+  line-height: 1.5;
+  font-size: 1.5rem;
+}
