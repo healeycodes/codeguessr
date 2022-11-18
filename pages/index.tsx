@@ -18,7 +18,6 @@ async function getRandomRepository(
   skip: string[],
 ): Promise<RepositoryData> {
   const pickFrom = repositories.filter((r) => !skip.includes(r));
-  console.log(pickFrom.length)
 
   const repository = pickFrom[Math.floor(Math.random() * pickFrom.length)];
   const searchResponse = await fetch(
@@ -26,7 +25,6 @@ async function getRandomRepository(
     { referrerPolicy: 'no-referrer' }
   );
   const searchJSON = await searchResponse.json();
-  console.log(searchJSON);
   const filesWithURLs = searchJSON.items.filter((item: { url: undefined; }) => item.url !== undefined)
   const randomFile = filesWithURLs[Math.floor(Math.random() * filesWithURLs.length)];
 
