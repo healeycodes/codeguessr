@@ -11,8 +11,6 @@ import 'highlight.js/styles/github.css';
 
 type RepositoryData = {
   repository: string,
-  url: string,
-  ownerAvatarURL: string,
   downloadURL: string,
 }
 
@@ -20,12 +18,15 @@ async function getRandomRepository(
   skip: string[],
 ): Promise<RepositoryData> {
   const pickFrom = repositories.filter((r) => !skip.includes(r));
+  console.log(pickFrom.length)
 
   const repository = pickFrom[Math.floor(Math.random() * pickFrom.length)];
   const searchResponse = await fetch(
-    `https://api.github.com/search/code?q=%20+repo:${repository}`
+    `https://api.github.com/search/code?q=%20+repo:${repository}`,
+    { referrerPolicy: 'no-referrer' }
   );
   const searchJSON = await searchResponse.json();
+  console.log(searchJSON);
   const filesWithURLs = searchJSON.items.filter((item: { url: undefined; }) => item.url !== undefined)
   const randomFile = filesWithURLs[Math.floor(Math.random() * filesWithURLs.length)];
 
@@ -36,13 +37,10 @@ async function getRandomRepository(
   }
 
   const { url } = randomFile;
-  const ownerAvatarURL = randomFile.repository.owner.avatar_url;
-  const downloadURL = (await (await fetch(url)).json()).download_url;
+  const downloadURL = (await (await fetch(url, { referrerPolicy: 'no-referrer' })).json()).download_url;
 
   return {
     repository,
-    url,
-    ownerAvatarURL,
     downloadURL,
   };
 }

@@ -14,17 +14,6 @@ input, button, p {
   font-size: 16px;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-
-  body {
-    color: white;
-    background: black;
-  }
-}
-
 /**
  * select-search styles
  */
