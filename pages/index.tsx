@@ -143,7 +143,7 @@ export default function Home() {
         />
         <button disabled={gameComplete} className={styles.guessbtn} onClick={() => guess(false)}>Guess</button>
         <button disabled={gameComplete} className={styles.guessbtn} onClick={() => guess(true)}>Skip</button>
-        <p className={styles.guesstext}>{guessText}{winText && <><br /><br />{winText}</>}</p>
+        <p className={styles.guesstext}>{guessText}{" "}{winText}</p>
 
         {!gameComplete && <pre className={styles.snippet}><code>{snippet}</code></pre>}
 
