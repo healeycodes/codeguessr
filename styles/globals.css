@@ -14,6 +14,10 @@ input, button, p {
   font-size: 16px;
 }
 
+button {
+  color: #000;
+}
+
 /**
  * select-search styles
  */
