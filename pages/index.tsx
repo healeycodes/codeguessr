@@ -84,6 +84,10 @@ export default function Home() {
   }
 
   useEffect(() => {
+    hljs.highlightAll()
+  }, [snippet])
+
+  useEffect(() => {
     if (gameComplete) {
       return
     }
@@ -104,46 +108,44 @@ export default function Home() {
       })
   }, [stage])
 
-  useEffect(() => {
-    hljs.highlightAll()
-  }, [snippet])
-
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>CodeGuessr</title>
-        <meta name="description" content="Like GeoGuessr but for code. Guess which popular open source project a code snippet belongs to." />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div className={styles.page}>
+      <div className={styles.container}>
+        <Head>
+          <title>CodeGuessr</title>
+          <meta name="description" content="Like GeoGuessr but for code. Guess which popular open source project a code snippet belongs to." />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to CodeGuessr
-        </h1>
+        <main className={styles.main}>
+          <h1 className={styles.title}>
+            Welcome to CodeGuessr
+          </h1>
 
-        <p className={styles.description}>
-          A game for nerds, by a nerd (<a href="https://twitter.com/healeycodes">@healeycodes</a>)
-        </p>
+          <p className={styles.description}>
+            A game for nerds, by a nerd (<a href="https://twitter.com/healeycodes">@healeycodes</a>)
+          </p>
 
-        <p className={styles.description}>
-          What popular open source repository is this code from?
-          <br></br>
-          Round <b>{stage}/{maxStage}</b>, {gameComplete && "Final "}Score <b>{score}{gameComplete && "!"}</b>
-        </p>
+          <p className={styles.description}>
+            What popular open source repository is this code from?
+            <br></br>
+            Round <b>{stage}/{maxStage}</b>, {gameComplete && "Final "}Score <b>{score}{gameComplete && "!"}</b>
+          </p>
 
-        <SelectSearch
-          id="repository-search"
-          options={searchItems}
-          placeholder="Search/select Top 100 GitHub repositories (by stars)"
-          search
-        />
-        <button disabled={gameComplete} className={styles.guessbtn} onClick={() => guess(false)}>Guess</button>
-        <button disabled={gameComplete} className={styles.guessbtn} onClick={() => guess(true)}>Skip</button>
-        <p className={styles.guesstext}>{guessText}{" "}{winText}</p>
+          <SelectSearch
+            id="repository-search"
+            options={searchItems}
+            placeholder="Search/select Top 100 GitHub repositories (by stars)"
+            search
+          />
+          <button disabled={gameComplete} className={styles.guessbtn} onClick={() => guess(false)}>Guess</button>
+          <button disabled={gameComplete} className={styles.guessbtn} onClick={() => guess(true)}>Skip</button>
+          <p className={styles.guesstext}>{guessText}{" "}{winText}</p>
 
-        {!gameComplete && <pre className={styles.snippet}><code>{snippet}</code></pre>}
-
-      </main>
-    </div >
+          {!gameComplete && <pre className={styles.snippet}><code>{snippet}</code></pre>}
+          <small>Source: <a href="https://github.com/healeycodes/codeguessr">https://github.com/healeycodes/codeguessr</a></small>
+        </main>
+      </div>
+    </div>
   )
 }

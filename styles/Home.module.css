@@ -1,5 +1,11 @@
+.page {
+  display: flex;
+  justify-content: center;
+}
+
 .container {
   padding: 0 2rem;
+  max-width: 768px;
 }
 
 .main {
