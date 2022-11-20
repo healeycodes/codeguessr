@@ -28,7 +28,7 @@ async function getRandomRepository(
   const filesWithURLs = searchJSON.items.filter((item: { url: undefined; }) => item.url !== undefined)
   const randomFile = filesWithURLs[Math.floor(Math.random() * filesWithURLs.length)];
 
-  // Rarely (say, 1 in 50) we get an error here because `randomFile` is undefined.
+  // Rarely (say, 1 in 100) we get an error here because `randomFile` is undefined.
   // To ship this, I'm just adding some retry logic. TODO: fix me.
   if (randomFile === undefined) {
     return getRandomRepository(skip)

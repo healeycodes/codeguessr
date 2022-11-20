@@ -4,8 +4,6 @@ Like GeoGuessr but for code. Guess which popular open source project a random co
 
 <img alt="Preview image CodeGuessr" src="https://github.com/healeycodes/codeguessr/blob/main/preview.png" width="375"/>
 
-The 100 repositories were hand-picked from the top 200 repositories (roughly by stars).
-
 Powered by Next.js, highlight.js, and the GitHub API!
 
 ## Dev
