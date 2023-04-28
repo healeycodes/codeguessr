@@ -20,13 +20,34 @@ async function getRandomRepository(
   const pickFrom = repositories.filter((r) => !skip.includes(r));
 
   const repository = pickFrom[Math.floor(Math.random() * pickFrom.length)];
-  const searchResponse = await fetch(
-    `https://api.github.com/search/code?q=%20+repo:${repository}`,
-    { referrerPolicy: 'no-referrer' }
+
+  const repositoryResponse = await fetch(
+    `https://api.github.com/repos/${repository}`,
+    {
+      referrerPolicy: 'no-referrer',
+      headers: {
+        'Accept': 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28'
+      }
+    }
   );
-  const searchJSON = await searchResponse.json();
-  const filesWithURLs = searchJSON.items.filter((item: { url: undefined; }) => item.url !== undefined)
-  const randomFile = filesWithURLs[Math.floor(Math.random() * filesWithURLs.length)];
+  const repositoryJSON = await repositoryResponse.json();
+  const defaultBranch: string = repositoryJSON.default_branch;
+
+  const treeResponse = await fetch(
+    `https://api.github.com/repos/${repository}/git/trees/${defaultBranch}?recursive=1`,
+    {
+      referrerPolicy: 'no-referrer',
+      headers: {
+        'Accept': 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28'
+      }
+    }
+  );
+  const treeJSON = await treeResponse.json();
+  const files = treeJSON.tree.filter(
+    (item: { type: string; }) => item.type == 'blob');
+  const randomFile = files[Math.floor(Math.random() * files.length)];
 
   // Rarely (say, 1 in 100) we get an error here because `randomFile` is undefined.
   // To ship this, I'm just adding some retry logic. TODO: fix me.
@@ -34,8 +55,9 @@ async function getRandomRepository(
     return getRandomRepository(skip)
   }
 
-  const { url } = randomFile;
-  const downloadURL = (await (await fetch(url, { referrerPolicy: 'no-referrer' })).json()).download_url;
+  const { path } = randomFile;
+  const downloadURL =
+    `https://raw.githubusercontent.com/${repository}/${defaultBranch}/${path}`;
 
   return {
     repository,
